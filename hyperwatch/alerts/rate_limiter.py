@@ -3,7 +3,6 @@ import os
 import time
 from typing import Optional, Dict, List, Tuple, Callable
 
-# default cooldown
 DEFAULT_COOLDOWN_SECONDS = 30  # 30 seconds
 
 class RateLimiter:
