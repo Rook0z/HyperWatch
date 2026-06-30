@@ -9,10 +9,9 @@ from dataclasses import dataclass, field
 from hyperwatch.core.config import HYPERCORE_WS_URL, WATCHED_WALLETS
 from hyperwatch.core.event_parser import parse_event
 from hyperwatch.alerts.engine import AlertEngine 
-
-# Setup logging with better format
+t
 logging.basicConfig(
-    level=logging.INFO,  # INFO to reduce spam
+    level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 
@@ -62,13 +61,12 @@ class HyperCoreClient:
         self.is_shutting_down = False
         self.health_check_task: Optional[asyncio.Task] = None
         self.last_health_check = time.time()
-        self._connection_healthy = True  # Track connection health internally
+        self._connection_healthy = True
         
         # Better wallet validation and tracking
         self.watched_wallet_set = {w.lower() for w in WATCHED_WALLETS}
         self.watched_wallets_original = {w.lower(): w for w in WATCHED_WALLETS}  # Keep original case
         
-        # Add per-wallet statistics
         for wallet in WATCHED_WALLETS:
             self.stats.wallet_events[wallet] = 0
 
@@ -151,8 +149,8 @@ class HyperCoreClient:
                 await self.ws.send(json.dumps(ping_message))
                 
                 # Wait for any response within timeout (don't expect specific pong format)
-                # Just check that the connection is still responsive
-                await asyncio.sleep(0.1)  # Small delay to allow response
+                # check if the connection is still responsive
+                await asyncio.sleep(0.1)
                 
                 # If we get here without exception, connection is healthy
                 self.last_health_check = time.time()
@@ -371,7 +369,6 @@ class HyperCoreClient:
             parsed_events = parse_event(event_data, channel, wallet)
             
             if not parsed_events:
-                # Don't log this as it creates spam - parser handles its own logging
                 return
                 
             if not isinstance(parsed_events, list):
