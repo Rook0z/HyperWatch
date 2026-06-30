@@ -31,7 +31,7 @@ async def main():
         # Process event for alerts, pass the async alert_handler
         await process_event_for_alerts(event, rules=DEFAULT_RULES, alert_handler=alert_handler)
 
-        # Let async tasks complete
+        # async tasks complete
         await asyncio.sleep(0.1)
 
 if __name__ == "__main__":
