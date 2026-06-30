@@ -2,7 +2,6 @@ import logging
 import asyncio
 from hyperwatch.core.hypercore_client import HyperCoreClient
 
-# Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
