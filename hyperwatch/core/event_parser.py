@@ -5,7 +5,6 @@ from hyperwatch.alerts.formatter import format_notification
 
 logger = logging.getLogger(__name__)
 
-# Import the deduplicator
 try:
     from hyperwatch.core.event_deduplicator import event_deduplicator
 except ImportError:
